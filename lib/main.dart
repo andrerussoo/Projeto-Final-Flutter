@@ -50,7 +50,7 @@ class _InicioState extends State<Inicio> {
     carregarReceitas();
   }
 
-  // CARREGAR RECEITAS DA API
+
   Future<void> carregarReceitas() async {
     setState(() {
       carregando = true;
@@ -77,7 +77,7 @@ class _InicioState extends State<Inicio> {
     }
   }
 
-  // PESQUISAR RECEITAS PELO NOME
+
   Future<void> pesquisarReceitas(String termo) async {
     final consulta = termo.trim();
 
@@ -118,7 +118,7 @@ class _InicioState extends State<Inicio> {
     }
   }
 
-  // ADICIONAR OU REMOVER FAVORITO
+
   void alterarFavorito(Receita receita) {
     setState(() {
       if (favoritos.containsKey(receita.id)) {
@@ -129,7 +129,6 @@ class _InicioState extends State<Inicio> {
     });
   }
 
-  // ABRIR DETALHES DA RECEITA
   Future<void> abrirReceita(Receita receita) async {
     try {
       final detalhe = await ReceitaApi.buscarPorId(receita.id);
@@ -167,7 +166,6 @@ class _InicioState extends State<Inicio> {
     }
   }
 
-  // LIMPAR PESQUISA
   Future<void> limparPesquisa() async {
     await carregarReceitas();
 
