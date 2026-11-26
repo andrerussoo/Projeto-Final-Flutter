@@ -3,13 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// CORES
 const azul = Color(0xFF2962A3);
 const azulEscuro = Color(0xFF1E3550);
 const azulClaro = Color(0xFFD6E7FA);
 const fundo = Color(0xFFFAF7F0);
 
-// MODELO DE RECEITA
 class Receita {
   final int id;
   final String nome;
@@ -56,11 +54,9 @@ class Receita {
   }
 }
 
-// CONEXÃO COM A API
 class ReceitaApi {
   static const String baseUrl = 'https://dummyjson.com/recipes';
 
-  // Busca todas as receitas
   static Future<List<Receita>> buscarTodas() async {
     final resposta = await http.get(
       Uri.parse('$baseUrl?limit=50'),
@@ -76,7 +72,6 @@ class ReceitaApi {
     throw Exception('Não foi possível carregar as receitas.');
   }
 
-  // Pesquisa receitas pelo nome
   static Future<List<Receita>> buscarPorNome(String nome) async {
     final url = Uri.parse('$baseUrl/search').replace(
       queryParameters: {'q': nome.trim()},
@@ -94,7 +89,7 @@ class ReceitaApi {
     throw Exception('Não foi possível pesquisar as receitas.');
   }
 
-  // Busca uma receita pelo ID
+
   static Future<Receita> buscarPorId(int id) async {
     final resposta = await http.get(Uri.parse('$baseUrl/$id'));
 
@@ -106,7 +101,7 @@ class ReceitaApi {
   }
 }
 
-// TÍTULO DAS TELAS
+
 Widget tituloPagina(String titulo, String subtitulo) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 20),
@@ -128,7 +123,7 @@ Widget tituloPagina(String titulo, String subtitulo) {
   );
 }
 
-// CAMPO DE PESQUISA
+
 class CampoPesquisa extends StatefulWidget {
   final Function(String) onPesquisar;
 
@@ -209,7 +204,7 @@ class _CampoPesquisaState extends State<CampoPesquisa> {
   }
 }
 
-// MENSAGEM DE ERRO
+
 class MensagemErro extends StatelessWidget {
   final String mensagem;
   final VoidCallback onTentarNovamente;
@@ -240,7 +235,7 @@ class MensagemErro extends StatelessWidget {
   }
 }
 
-// CARD DE RECEITA
+
 class CardReceita extends StatelessWidget {
   final Receita receita;
   final bool favorito;
@@ -303,7 +298,7 @@ class CardReceita extends StatelessWidget {
   }
 }
 
-// TELA INICIAL
+
 class TelaInicio extends StatelessWidget {
   final List<Receita> receitas;
   final bool carregando;
@@ -368,7 +363,7 @@ class TelaInicio extends StatelessWidget {
   }
 }
 
-// TELA DE FAVORITOS
+
 class TelaFavoritos extends StatelessWidget {
   final List<Receita> favoritos;
   final Function(Receita) onAbrirReceita;
@@ -413,7 +408,7 @@ class TelaFavoritos extends StatelessWidget {
   }
 }
 
-// TELA DE TODAS AS RECEITAS
+
 class TelaReceitas extends StatefulWidget {
   final List<Receita> receitas;
   final bool carregando;
@@ -492,7 +487,7 @@ class _TelaReceitasState extends State<TelaReceitas> {
 
   @override
   Widget build(BuildContext context) {
-    // Filtra as receitas pela categoria escolhida.
+
     final listaFiltrada = widget.receitas.where((receita) {
       if (categoriaSelecionada == 'Todas') {
         return true;
@@ -607,7 +602,7 @@ class _TelaReceitasState extends State<TelaReceitas> {
   }
 }
 
-// TELA DE DETALHES
+
 class DetalhesReceita extends StatefulWidget {
   final Receita receita;
   final bool favorito;
